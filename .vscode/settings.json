@@ -1,0 +1,12 @@
+{
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "cSpell.enabled": true,
+
+    "importSorter.generalConfiguration.sortOnBeforeSave": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": false,
+    "cSpell.words": [
+        "automapper",
+        "typegoose"
+    ]
+}

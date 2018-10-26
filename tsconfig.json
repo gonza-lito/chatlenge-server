@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "declaration": true,
+        "lib": ["es2017", "dom"],
+        "module": "commonjs",
+        "pretty": true,
+        "sourceMap": true,
+        "outDir": "dist",
+        "importHelpers": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "forceConsistentCasingInFileNames": true,
+        "strictNullChecks": false,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "typeRoots" : [
+            "./node_modules/@types",
+            "./src/types"
+        ]
+    },
+    "include": [
+         "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
