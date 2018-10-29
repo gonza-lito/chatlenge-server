@@ -1,4 +1,4 @@
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 import { IMessage } from 'src/interfaces/IMessage';
 
 import { Events } from '../events/Events';
