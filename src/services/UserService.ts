@@ -24,7 +24,8 @@ export default class UserService {
     }
 
     public logOutBySocketId(socketId: string): IUser[] {
-        if (!remove(this.userList, (usr) => usr.socketId === socketId)) {
+        const removed = remove(this.userList, (usr) => usr.socketId === socketId);
+        if (!removed.length) {
             throw Error('User not found!');
         }
         return this.userList;

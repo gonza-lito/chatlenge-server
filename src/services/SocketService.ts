@@ -28,7 +28,7 @@ export default class SocketServer {
 
                 } catch (e) {
                     logger.error(e);
-                    respondWith({ errorMessage: e.message });
+                    respondWith(e.message);
                 }
             });
 
@@ -43,9 +43,10 @@ export default class SocketServer {
 
             socket.on('disconnect', () => {
                 try {
-                    socket.emit(Events.userListUpdate, this.userService.logOutBySocketId(socket.id));
+                    logger.info(`disconnecting: ${socket.id}`);
+                    this.socketServer.emit(Events.userListUpdate, this.userService.logOutBySocketId(socket.id));
                 } catch (e) {
-                    logger.error(e);
+                    logger.error(e.message);
                 }
             });
         });
