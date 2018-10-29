@@ -23,12 +23,12 @@ export default class UserService {
         return this.userList;
     }
 
-    public logOutBySocketId(socketId: string): IUser[] {
+    public logOutBySocketId(socketId: string): IUser {
         const removed = remove(this.userList, (usr) => usr.socketId === socketId);
         if (!removed.length) {
             throw Error('User not found!');
         }
-        return this.userList;
+        return removed.pop();
     }
     public getUsers(): IUser[] {
         return this.userList;

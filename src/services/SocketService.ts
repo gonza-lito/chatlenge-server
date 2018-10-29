@@ -24,6 +24,7 @@ export default class SocketServer {
                     const user = this.userService.logIn(userName, socket);
                     this.socketServer.emit(Events.userListUpdate, this.userService.getUsers());
                     socket.emit(Events.messagesUpdate, this.chatService.getHistory());
+                    socket.broadcast.emit(Events.userConnected, user.name);
                     respondWith(user);
 
                 } catch (e) {
@@ -32,8 +33,11 @@ export default class SocketServer {
                 }
             });
 
-            socket.on(Events.userTyping, () => {
-                socket.broadcast.emit(Events.userTyping, socket.id);
+            socket.on(Events.userTyping, (userName: string) => {
+                socket.broadcast.emit(Events.userTyping, userName);
+            });
+            socket.on(Events.userStoppedTyping, (userName: string) => {
+                socket.broadcast.emit(Events.userStoppedTyping, userName);
             });
 
             socket.on(Events.messageSend, (message: IMessage) => {
@@ -44,7 +48,9 @@ export default class SocketServer {
             socket.on('disconnect', () => {
                 try {
                     logger.info(`disconnecting: ${socket.id}`);
-                    this.socketServer.emit(Events.userListUpdate, this.userService.logOutBySocketId(socket.id));
+                    const user =  this.userService.logOutBySocketId(socket.id);
+                    this.socketServer.emit(Events.userListUpdate, this.userService.getUsers());
+                    this.socketServer.emit(Events.userDisconnected, user.name);
                 } catch (e) {
                     logger.error(e.message);
                 }
